@@ -1,0 +1,40 @@
+﻿<h1 style="color:blue">
+    Api Hospitales FRONT
+</h1>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            var urlapi = "https://apihospitalesazure2023pgs.azurewebsites.net/api/hospitales";
+            $.ajax({
+                url: urlapi,
+                method: "GET",
+                success: function(data) {
+                    var html = "";
+                    //RECORREMOS TODO EL JSON
+                    $.each(data, function(index, hospital) {
+                        html += "<tr>";
+                        html += "<td>" + hospital.nombre + "</td>";
+                        html += "<td>" + hospital.direccion + "</td>";
+                        html += "<td>" + hospital.telefono + "</td>";
+                        html += "<td>" + hospital.camas + "</td>";
+                        html += "</tr>";
+                    })
+                    $("#tablahospitales tbody").html(html);
+                }
+            })
+        });
+    </script>
+}
+
+<table id="tablahospitales" class="table table-warning">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Camas</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
